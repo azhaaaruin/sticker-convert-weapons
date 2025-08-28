@@ -14,3 +14,8 @@ src/tg_bot/
 
 Run:
   BOT_TOKEN=... GEMINI_API_KEY=... python -m tg_bot.bot
+
+AWS Lambda (webhook):
+- Build container with Dockerfile.lambda and deploy to Lambda via ECR.
+- Expose a Function URL or API Gateway endpoint.
+- Set Telegram webhook to that URL, optionally with TELEGRAM_WEBHOOK_SECRET.

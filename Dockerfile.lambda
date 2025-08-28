@@ -1,0 +1,17 @@
+FROM public.ecr.aws/lambda/python:3.11
+
+# ffmpeg for media conversion
+RUN yum install -y epel-release || true && \
+    yum install -y ffmpeg && \
+    yum clean all
+
+WORKDIR /var/task
+
+COPY requirements.txt pyproject.toml README.md ./
+COPY src ./src
+
+RUN pip install --no-cache-dir .
+
+# Set the Lambda handler to our module:function
+ENV PYTHONUNBUFFERED=1
+CMD ["tg_bot.lambda_handler.handler"]

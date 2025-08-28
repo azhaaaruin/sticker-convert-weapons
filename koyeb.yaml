@@ -1,25 +1,2 @@
 # Koyeb service configuration for the Telegram bot
-name: sticker-convert-bot
-services:
-  - name: bot
-    type: worker
-    instance_type: nano
-    routes: []  # no HTTP routes; polling bot
-    docker:
-  dockerfile: Dockerfile.bot
-  # Force amd64 to ensure ffmpeg compatibility; adjust only if needed
-  platform: linux/amd64
-    env:
-      - key: BOT_TOKEN
-        value: ${BOT_TOKEN}
-      - key: GEMINI_API_KEY
-        value: ${GEMINI_API_KEY}
-      - key: MAX_FILE_SIZE_MB
-        value: ${MAX_FILE_SIZE_MB:-25}
-    # Optional volume example (commented):
-    # volumes:
-    #   - name: data
-    #     mount_path: /data
-    #     size_gb: 1
-    #     encrypted: true
-    #     read_only: false
+## Removed: Migrated to AWS Lambda. This file intentionally left blank.
