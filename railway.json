@@ -1,0 +1,16 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "docker",
+    "dockerfilePath": "Dockerfile.bot"
+  },
+  "deploy": {
+    "startCommand": "sticker-bot",
+    "restartPolicyType": "ON_FAILURE"
+  },
+  "variables": {
+    "BOT_TOKEN": { "description": "Telegram bot token", "required": true },
+    "GEMINI_API_KEY": { "description": "Optional Gemini API key for emoji detection", "required": false },
+    "MAX_FILE_SIZE_MB": { "description": "Max file size accepted by bot", "required": false, "defaultValue": "25" }
+  }
+}

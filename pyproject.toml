@@ -37,6 +37,7 @@ Repository = "https://github.com/laggykiller/sticker-convert"
 
 [project.scripts]
 sticker-convert = "sticker_convert.__main__:main"
+sticker-bot = "tg_bot.bot:main"
 
 [build-system]
 requires = ["setuptools>=61.0.0"]

@@ -1,0 +1,21 @@
+FROM python:3.11-slim
+
+# Install runtime deps for media processing (ffmpeg provides libav*)
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends ffmpeg ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy project files
+COPY requirements.txt pyproject.toml README.md /app/
+COPY src /app/src
+
+# Install the package (uses pyproject dynamic deps -> requirements.txt)
+RUN pip install --no-cache-dir .
+
+# Environment (Railway will inject BOT_TOKEN and optionally GEMINI_API_KEY)
+ENV PYTHONUNBUFFERED=1
+
+# Run the Telegram bot (polling)
+CMD ["sticker-bot"]
