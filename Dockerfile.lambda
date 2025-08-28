@@ -1,9 +1,13 @@
 FROM public.ecr.aws/lambda/python:3.11
 
-# ffmpeg for media conversion
-RUN yum install -y epel-release || true && \
-    yum install -y ffmpeg && \
-    yum clean all
+# Install static ffmpeg (no OS repo dependency)
+RUN set -eux; \
+    curl -L -o /tmp/ffmpeg.tar.xz https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz; \
+    tar -xJf /tmp/ffmpeg.tar.xz -C /opt; \
+    FFMPEG_DIR=$(find /opt -maxdepth 1 -type d -name 'ffmpeg-*amd64-static' | head -n1); \
+    ln -s "$FFMPEG_DIR/ffmpeg" /usr/local/bin/ffmpeg; \
+    ln -s "$FFMPEG_DIR/ffprobe" /usr/local/bin/ffprobe; \
+    rm -f /tmp/ffmpeg.tar.xz
 
 WORKDIR /var/task
 
