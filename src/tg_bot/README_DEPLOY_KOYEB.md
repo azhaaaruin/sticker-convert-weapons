@@ -9,7 +9,8 @@ Steps (UI)
 1) In Koyeb, create a new App → Deploy from GitHub → select this repository.
 2) Build settings:
    - Build method: Docker
-   - Dockerfile path: Dockerfile.bot
+   - Dockerfile path: Dockerfile.bot  ← important
+   - Platform/Architecture: linux/amd64 (recommended)
 3) Runtime command: leave default (Dockerfile CMD is sticker-bot).
 4) Networking:
    - Do NOT expose any port (no routes needed). This runs as a worker-like service.
@@ -31,3 +32,4 @@ Troubleshooting
 - If the service restarts repeatedly, confirm BOT_TOKEN is valid and the bot is started via @BotFather.
 - If emoji detection fails, set GEMINI_API_KEY or run with fallback (default 😀).
 - ffmpeg is installed in the image; if a specific format fails, capture logs and sample to debug.
+- If you see "exec: /usr/bin/wine: Exec format error" during build, you're building the root Dockerfile (GUI image) instead of Dockerfile.bot. Edit the Koyeb build to use Dockerfile.bot.

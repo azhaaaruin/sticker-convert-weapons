@@ -6,8 +6,9 @@ services:
     instance_type: nano
     routes: []  # no HTTP routes; polling bot
     docker:
-      dockerfile: Dockerfile.bot
-      target: 
+  dockerfile: Dockerfile.bot
+  # Force amd64 to ensure ffmpeg compatibility; adjust only if needed
+  platform: linux/amd64
     env:
       - key: BOT_TOKEN
         value: ${BOT_TOKEN}
